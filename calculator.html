@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link rel="stylesheet" href="styles.css"></head>
+<body>
+  <div id="calcContainer">
+    <form name="calculator">
+      <div class="result-clear">
+        <input type="text" class="result" name="answer" readonly />
+        <input type="button" class="clear" value=" AC" data-action="clear" />
+      </div>
+      <div class="grid-buttons">
+        <input type="button" value="9" data-action="append" />
+        <input type="button" value="8" data-action="append" />
+        <input type="button" value="7" data-action="append" />
+        <input type="button" value="+" data-action="append" class="math" />
+        <br />
+        <input type="button" value="4" data-action="append" />
+        <input type="button" value="5" data-action="append" />
+        <input type="button" value="6" data-action="append" />
+        <input type="button" value="-" data-action="append" class="math" />
+        <br />
+        <input type="button" value="1" data-action="append" />
+        <input type="button" value="2" data-action="append" />
+        <input type="button" value="3" data-action="append" />
+        <input type="button" value="/" data-action="append" class="math" />
+        <br />
+        <input type="button" value="." data-action="append" />
+        <input type="button" value="0" data-action="append" />
+        <input type="button" value="=" data-action="calculate" />
+        <input type="button" value="*" data-action="append" class="math" />
+      </div>
+    </form>
+  </div>
+
+  <!-- Add your JavaScript code here -->
+  <script>
+    const answerField = document.forms.calculator.answer;
+    const buttons = document.querySelectorAll('[data-action]');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const action = button.getAttribute('data-action');
+        const value = button.value;
+
+        switch (action) {
+          case 'append':
+            answerField.value += value;
+            break;
+          case 'clear':
+            answerField.value = '';
+            break;
+          case 'calculate':
+            try {
+              answerField.value = eval(answerField.value);
+            } catch (error) {
+              answerField.value = 'Error';
+            }
+            break;
+        }
+      });
+    });
+  </script>
+
+
+</body>
+</html>
